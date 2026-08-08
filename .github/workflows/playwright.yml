@@ -1,0 +1,27 @@
+name: Playwright Table Sum Audit
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  run-audit:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        pip install playwright
+        playwright install chromium
+
+    # Strict constraint matching your submission email id
+    - name: Run Playwright Script for 22f3002107@ds.study.iitm.ac.in
+      run: python script.py
